@@ -111,6 +111,13 @@ augment rainbow.types.terminal {
     return this   
   }
 
+  function draw = |this, char, howMany| {
+    let builder = java.lang.StringBuilder()
+    howMany:times(-> builder:append(char))
+    print(builder:toString())
+    return this
+  }
+
   function print = |this, message| {
     print(message)
     return this
