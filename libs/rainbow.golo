@@ -15,6 +15,36 @@ augment rainbow.types.terminal {
     return this
   }
 
+  function bright = |this| { # make reset before ?
+    print(this:escCode()+"1m")
+    return this
+  }
+
+  function dim = |this| { # doesn't work
+    print(this:escCode()+"2m")
+    return this
+  }
+
+  function underscore = |this| {
+    print(this:escCode()+"4m")
+    return this
+  }
+
+  function blink = |this| { # doesn't work
+    print(this:escCode()+"5m")
+    return this
+  }
+
+  function reverse = |this| {
+    print(this:escCode()+"7m")
+    return this
+  }
+
+  function hidden = |this| { # doesn't work
+    print(this:escCode()+"8m")
+    return this
+  }
+
   function black = |this| {
     print(this:escCode()+"30m")
     return this
