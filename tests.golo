@@ -3,6 +3,8 @@ module tests
 import rainbow
 
 function main = |args| {
+
+  
   console():clear():pos(0,5)
    :red():print("hello"):brightRed():println("salut")
    :pos(10,5):blue():println("k33g_org")
@@ -11,4 +13,7 @@ function main = |args| {
   
   console():reset():cyan():pos(15,10):draw("=",15)
   readln("?")
+
+  console():red():reverse():println("SALUT!!!")
+  console():reset():red():bright():underscore():println("SALUT!!!")
 }
