@@ -20,6 +20,11 @@ augment rainbow.types.terminal {
     return this
   }
 
+  function blackBg = |this| {
+    print(this:escCode()+"40m")
+    return this
+  }
+
   function gray = |this| {
     print(this:escCode()+"30;1m")
     return this
@@ -35,6 +40,11 @@ augment rainbow.types.terminal {
     return this
   }
 
+  function redBg = |this| {
+    print(this:escCode()+"41m")
+    return this
+  }  
+
   function green = |this| {
     print(this:escCode()+"32m")
     return this
@@ -45,8 +55,18 @@ augment rainbow.types.terminal {
     return this
   }
 
+  function greenBg = |this| {
+    print(this:escCode()+"42m")
+    return this
+  }
+
   function yellow = |this| {
     print(this:escCode()+"33m")
+    return this
+  }
+
+  function brightYellow = |this| {
+    print(this:escCode()+"33;1m")
     return this
   }
 
@@ -54,11 +74,6 @@ augment rainbow.types.terminal {
     print(this:escCode()+"43m")
     return this
   }  
-
-  function brightYellow = |this| {
-    print(this:escCode()+"33;1m")
-    return this
-  }
 
   function blue = |this| {
     print(this:escCode()+"34m")
@@ -70,7 +85,12 @@ augment rainbow.types.terminal {
     return this
   }
 
-  function purple = |this| {
+  function blueBg = |this| {
+    print(this:escCode()+"44m")
+    return this
+  }  
+
+  function purple = |this| { #Magenta
     print(this:escCode()+"35m")
     return this
   }
@@ -79,6 +99,11 @@ augment rainbow.types.terminal {
     print(this:escCode()+"35;1m")
     return this
   }
+
+  function purpleBg = |this| {
+    print(this:escCode()+"45m")
+    return this
+  }    
 
   function cyan = |this| {
     print(this:escCode()+"36m")
@@ -90,6 +115,11 @@ augment rainbow.types.terminal {
     return this
   }
 
+  function cyanBg = |this| {
+    print(this:escCode()+"46m")
+    return this
+  }  
+
   function white = |this| {
     print(this:escCode()+"37m")
     return this
@@ -100,6 +130,10 @@ augment rainbow.types.terminal {
     return this
   }
 
+  function whiteBg = |this| {
+    print(this:escCode()+"47m")
+    return this
+  }  
 
   function pos = |this, row, col| {
     print(this:escCode()+"%s;%sf":format(row:toString(), col:toString())) 
