@@ -175,7 +175,7 @@ augment rainbow.types.terminal {
     return this   
   }
 
-  function draw = |this, char, howMany| {
+  function drawLine = |this, char, howMany| {
     let builder = java.lang.StringBuilder()
     howMany:times(-> builder:append(char))
     print(builder:toString())
