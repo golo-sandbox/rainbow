@@ -7,6 +7,7 @@ struct terminal = {escCode}
 #http://www.unicode.org/charts/PDF/U2500.pdf
 #http://www.unicode.org/charts/PDF/U2580.pdf
 #http://www.unicode.org/charts/
+#http://dmmarks.com/UnicodeChars.html
 
 augment rainbow.types.terminal {
 
