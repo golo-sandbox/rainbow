@@ -1,6 +1,6 @@
 module rainbow
 
-struct terminal = {escCode}
+struct terminal = {escCode, row, col}
 
 #http://www.termsys.demon.co.uk/vtansi.htm
 #http://rsiqueira.postbit.com/upload/2/posts/unicode.html
@@ -167,8 +167,62 @@ augment rainbow.types.terminal {
   }  
 
   function pos = |this, row, col| {
+    this:row(row)
+    this:col(col)
     print(this:escCode()+"%s;%sf":format(row:toString(), col:toString())) 
     return this
+  }
+
+  function home = |this| {
+    return this:pos(0,0)
+  }
+
+  # Cursor Forward    <ESC>[{COUNT}C
+  # Moves the cursor forward by COUNT columns; the default count is 1.
+  function forward = |this, howMany| {
+    this:col(this:col() + howMany)
+    print(this:escCode()+"%sC":format(howMany:toString())) 
+    return this
+  }
+
+  function forward = |this| {
+    return this:forward(1)
+  }
+
+  # Cursor Backward   <ESC>[{COUNT}D
+  # Moves the cursor backward by COUNT columns; the default count is 1.
+  function backward = |this, howMany| {
+    this:col(this:col() - howMany)
+    print(this:escCode()+"%sD":format(howMany:toString())) 
+    return this
+  }
+
+  function backward = |this| {
+    return this:backward(1)
+  }
+
+  # Cursor Up   <ESC>[{COUNT}A
+  # Moves the cursor up by COUNT rows; the default count is 1.
+  function up = |this, howMany| {
+    this:row(this:row() - howMany)
+    print(this:escCode()+"%sA":format(howMany:toString())) 
+    return this
+  }
+
+  function up = |this| {
+    return this:up(1)
+  }
+
+ # Cursor Down   <ESC>[{COUNT}B
+ # Moves the cursor down by COUNT rows; the default count is 1.
+  function down = |this, howMany| {
+    this:row(this:row() + howMany)
+    print(this:escCode()+"%sB":format(howMany:toString())) 
+    return this
+  }
+
+  function down = |this| {
+    return this:down(1)
   }
 
   function clear = |this| {
@@ -176,23 +230,78 @@ augment rainbow.types.terminal {
     return this   
   }
 
-  function drawLine = |this, char, howMany| {
-    let builder = java.lang.StringBuilder()
-    howMany:times(-> builder:append(char))
-    print(builder:toString())
+  function drawLineForward = |this, char, howMany| {
+    #TODO : one char only ?
+    howMany:times({
+      this:print(char)
+    })
     return this
   }
 
+  function drawLineBackward = |this, char, howMany| {
+    #TODO : one char only ?
+    howMany:times({
+      this:print(char):backward():backward()
+    })
+    return this
+  }  
+
+  function drawLineDown = |this, char, howMany| {
+    #TODO : one char only ?
+    howMany:times({
+      this:print(char):down():backward()
+    }) 
+    return this
+  }
+
+  function drawLineUp = |this, char, howMany| {
+    #TODO : one char only ?
+    howMany:times({
+      this:print(char):up():backward()
+    }) 
+    return this
+  }
+
+  function simpleBox = |this, width, height| {
+    return this:print("\u250c")
+      :drawLineForward("\u2500", width)
+      :print("\u2510")
+      :down():backward():drawLineDown("\u2502", height)
+      :print("\u2518")
+      :backward():backward():drawLineBackward("\u2500", width)
+      :print("\u2514")
+      :backward():up():drawLineUp("\u2502", height)
+  }
+
+  
+
+  function doubleBox = |this, width, height| {
+    return this:print("\u2554")
+      :drawLineForward("\u2550", width)
+      :print("\u2557")
+      :down():backward():drawLineDown("\u2551", height)
+      :print("\u255D")
+      :backward():backward():drawLineBackward("\u2550", width)
+      :print("\u255A")
+      :backward():up():drawLineUp("\u2551", height)
+  }  
+
   function print = |this, message| {
+    this:col(this:col() + message:length())
     print(message)
     return this
   }
 
   function println = |this, message| {
     println(message)
+    this:row(this:row() + 1)
     return this
   }
 }
 
-function console = -> terminal("\u001B[")
+function console = {
+  let term = terminal("\u001B[", 0, 0)
+  term:home()
+  return term
+} 
 

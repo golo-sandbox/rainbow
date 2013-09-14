@@ -11,11 +11,14 @@ function main = |args| {
    :pos(5,5):green():print("\u27fb "):blackBg()
   readln("Hello, do you know Golo ?")
   
-  console():reset():cyan():pos(15,10):drawLine("=",15)
+  console():reset():cyan():pos(15,10):drawHLine("=",5)
   readln("> ?")
 
   console():red():reverse():pos(20,8):println("Hello")
   console():reset():red():pos(21,10):bright():underscore():println("World!")
+
+  console():pos(2,8):yellow():drawHLine(".",5):print("X")
+
 
   println("")
   println("")
