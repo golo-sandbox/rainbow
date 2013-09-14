@@ -6,14 +6,23 @@ function main = |args| {
 
   
   console():clear():pos(0,5)
-   :red():print("hello"):brightRed():println("salut")
-   :pos(10,5):blue():println("k33g_org")
-   :pos(5,5):blue():print("\u27fb "):yellowBg()
-  readln("Hello, what's your name ?")
+   :red():print("Golo"):brightRed():println("Golo")
+   :pos(10,5):blue():println("Rainbow by @k33g_org")
+   :pos(5,5):green():print("\u27fb "):blackBg()
+  readln("Hello, do you know Golo ?")
   
-  console():reset():cyan():pos(15,10):draw("=",15)
-  readln("?")
+  console():reset():cyan():pos(15,10):drawHLine("=",5)
+  readln("> ?")
 
-  console():red():reverse():println("SALUT!!!")
-  console():reset():red():bright():underscore():println("SALUT!!!")
+  console():red():reverse():pos(20,8):println("Hello")
+  console():reset():red():pos(21,10):bright():underscore():println("World!")
+
+  console():pos(2,8):yellow():drawHLine(".",5):print("X")
+
+
+  println("")
+  println("")
+  #console():clear():pos(0,5)
+
 }
+
