@@ -11,235 +11,150 @@ struct terminal = {escCode, row, col}
 
 augment org.k33g.rainbow.types.terminal {
 
-  function reset = |this| {
-    print(this:escCode()+"0m")
-    return this
-  }
+  function reset = |this| -> this:code(this:escCode()+"0m")
 
-  function bright = |this| { # make reset before ?
-    print(this:escCode()+"1m")
-    return this
-  }
+  # make reset before ?
+  function bright = |this| -> this:code(this:escCode()+"1m")
 
   function dim = |this| { # doesn't work
     print(this:escCode()+"2m")
     return this
   }
 
-  function underscore = |this| {
-    print(this:escCode()+"4m")
-    return this
-  }
+  function underscore = |this|  -> this:code(this:escCode()+"4m")
 
-  function blink = |this| { # doesn't work
-    print(this:escCode()+"5m")
-    return this
-  }
+  # doesn't work
+  function blink = |this| -> this:code(this:escCode()+"5m")
 
-  function reverse = |this| {
-    print(this:escCode()+"7m")
-    return this
-  }
+  function reverse = |this|  -> this:code(this:escCode()+"7m")
 
-  function hidden = |this| { # doesn't work
-    print(this:escCode()+"8m")
-    return this
-  }
+  # doesn't work
+  function hidden = |this| -> this:code(this:escCode()+"8m")
 
-  function black = |this| {
-    print(this:escCode()+"30m")
-    return this
-  }
+  function black = |this| -> this:code(this:escCode()+"30m")
 
-  function blackBg = |this| {
-    print(this:escCode()+"40m")
-    return this
-  }
+  function blackBg = |this| -> this:code(this:escCode()+"40m")
 
-  function gray = |this| {
-    print(this:escCode()+"30;1m")
-    return this
-  }
+  function gray = |this| -> this:code(this:escCode()+"30;1m")
 
-  function red = |this| {
-    print(this:escCode()+"31m")
-    return this
-  }
+  function red = |this| -> this:code(this:escCode()+"31m")
 
-  function brightRed = |this| {
-    print(this:escCode()+"31;1m")
-    return this
-  }
+  function brightRed = |this| -> this:code(this:escCode()+"31;1m")
 
-  function redBg = |this| {
-    print(this:escCode()+"41m")
-    return this
-  }  
+  function redBg = |this| -> this:code(this:escCode()+"41m")
 
-  function green = |this| {
-    print(this:escCode()+"32m")
-    return this
-  }
+  function green = |this| -> this:code(this:escCode()+"32m")
 
-  function brightGreen = |this| {
-    print(this:escCode()+"32;1m")
-    return this
-  }
+  function brightGreen = |this| -> this:code(this:escCode()+"32;1m")
 
-  function greenBg = |this| {
-    print(this:escCode()+"42m")
-    return this
-  }
+  function greenBg = |this| -> this:code(this:escCode()+"42m")
 
-  function yellow = |this| {
-    print(this:escCode()+"33m")
-    return this
-  }
+  function yellow = |this| -> this:code(this:escCode()+"33m")
 
-  function brightYellow = |this| {
-    print(this:escCode()+"33;1m")
-    return this
-  }
+  function brightYellow = |this| -> this:code(this:escCode()+"33;1m")
 
-  function yellowBg = |this| {
-    print(this:escCode()+"43m")
-    return this
-  }  
+  function yellowBg = |this| -> this:code(this:escCode()+"43m")
 
-  function blue = |this| {
-    print(this:escCode()+"34m")
-    return this
-  }
+  function blue = |this| -> this:code(this:escCode()+"34m")
 
-  function brightBlue = |this| {
-    print(this:escCode()+"34;1m")
-    return this
-  }
+  function brightBlue = |this| -> this:code(this:escCode()+"34;1m")
 
-  function blueBg = |this| {
-    print(this:escCode()+"44m")
-    return this
-  }  
+  function blueBg = |this| -> this:code(this:escCode()+"44m")
 
-  function purple = |this| { #Magenta
-    print(this:escCode()+"35m")
-    return this
-  }
+  function purple = |this| -> this:code(this:escCode()+"35m") # Magenta
 
-  function brightPurple = |this| {
-    print(this:escCode()+"35;1m")
-    return this
-  }
+  function brightPurple = |this| -> this:code(this:escCode()+"35;1m")
 
-  function purpleBg = |this| {
-    print(this:escCode()+"45m")
-    return this
-  }    
+  function purpleBg = |this| -> this:code(this:escCode()+"45m")
 
-  function cyan = |this| {
-    print(this:escCode()+"36m")
-    return this
-  }
+  function cyan = |this| -> this:code(this:escCode()+"36m")
 
-  function brightCyan = |this| {
-    print(this:escCode()+"36;1m")
-    return this
-  }
+  function brightCyan = |this| -> this:code(this:escCode()+"36;1m")
 
-  function cyanBg = |this| {
-    print(this:escCode()+"46m")
-    return this
-  }  
+  function cyanBg = |this| -> this:code(this:escCode()+"46m")
 
-  function white = |this| {
-    print(this:escCode()+"37m")
-    return this
-  }
+  function white = |this| -> this:code(this:escCode()+"37m")
 
-  function brightWhite = |this| {
-    print(this:escCode()+"37;1m")
-    return this
-  }
+  function brightWhite = |this| -> this:code(this:escCode()+"37;1m")
 
-  function whiteBg = |this| {
-    print(this:escCode()+"47m")
-    return this
-  }  
+  function whiteBg = |this| -> this:code(this:escCode()+"47m")
 
-  function pos = |this, row, col| {
-    this:row(row)
-    this:col(col)
-    print(this:escCode()+"%s;%sf":format(row:toString(), col:toString())) 
-    return this
-  }
+  function pos = |this, row, col| ->
+    this:row(row):col(col):code(this:escCode()+"%s;%sf":format(row:toString(), col:toString())) 
 
-  function home = |this| {
-    return this:pos(0,0)
-  }
+  #function pos = |this, row, col| {
+  #  this:row(row)
+  #  this:col(col)
+  #  this:code(this:escCode()+"%s;%sf":format(row:toString(), col:toString())) 
+  #  return this
+  #}
+
+  function home = |this| -> this:pos(0,0)
 
   # Cursor Forward    <ESC>[{COUNT}C
   # Moves the cursor forward by COUNT columns; the default count is 1.
-  function forward = |this, howMany| {
-    this:col(this:col() + howMany)
-    print(this:escCode()+"%sC":format(howMany:toString())) 
-    return this
-  }
+  function forward = |this, howMany| ->
+    this:col(this:col() + howMany):code(this:escCode()+"%sC":format(howMany:toString())) 
 
-  function forward = |this| {
-    return this:forward(1)
-  }
+  #function forward = |this, howMany| {
+  #  this:col(this:col() + howMany)
+  #  this:code(this:escCode()+"%sC":format(howMany:toString())) 
+  #  return this
+  #}
+
+  function forward = |this| -> this:forward(1)
 
   # Cursor Backward   <ESC>[{COUNT}D
   # Moves the cursor backward by COUNT columns; the default count is 1.
-  function backward = |this, howMany| {
-    this:col(this:col() - howMany)
-    print(this:escCode()+"%sD":format(howMany:toString())) 
-    return this
-  }
+  function backward = |this, howMany| ->
+    this:col(this:col() - howMany):code(this:escCode()+"%sD":format(howMany:toString())) 
 
-  function backward = |this| {
-    return this:backward(1)
-  }
+  #function backward = |this, howMany| {
+  #  this:col(this:col() - howMany)
+  #  this:code(this:escCode()+"%sD":format(howMany:toString())) 
+  #  return this
+  #}
+
+  function backward = |this| -> this:backward(1)
 
   # Cursor Up   <ESC>[{COUNT}A
   # Moves the cursor up by COUNT rows; the default count is 1.
-  function up = |this, howMany| {
-    this:row(this:row() - howMany)
-    print(this:escCode()+"%sA":format(howMany:toString())) 
-    return this
-  }
+  function up = |this, howMany| ->
+    this:row(this:row() - howMany):code(this:escCode()+"%sA":format(howMany:toString())) 
 
-  function up = |this| {
-    return this:up(1)
-  }
+  #function up = |this, howMany| {
+  #  this:row(this:row() - howMany)
+  #  this:code(this:escCode()+"%sA":format(howMany:toString())) 
+  #  return this
+  #}
+
+  function up = |this| -> this:up(1)
 
  # Cursor Down   <ESC>[{COUNT}B
  # Moves the cursor down by COUNT rows; the default count is 1.
-  function down = |this, howMany| {
-    this:row(this:row() + howMany)
-    print(this:escCode()+"%sB":format(howMany:toString())) 
-    return this
-  }
+  function down = |this, howMany| ->
+    this:row(this:row() + howMany):code(this:escCode()+"%sB":format(howMany:toString())) 
 
-  function down = |this| {
-    return this:down(1)
-  }
+  #function down = |this, howMany| {
+  #  this:row(this:row() + howMany)
+  #  this:code(this:escCode()+"%sB":format(howMany:toString())) 
+  #  return this
+  #}
 
-  function clear = |this| {
-    print(this:escCode()+"2J")
-    return this   
-  }
+  function down = |this|  -> this:down(1)
+  
+  function clear = |this| -> this:code(this:escCode()+"2J")
 
-  function drawLineForward = |this, char, howMany| {
-    #TODO : one char only ?
-    howMany:times({
-      this:print(char)
-    })
-    return this
-  }
+  function drawLineForward = |this, char, howMany| -> this:print(char * howMany) 
+
+  #function drawLineForward = |this, char, howMany| {
+  #  howMany:times({
+  #    this:print(char) 
+  #  })
+  #  return this
+  #}
 
   function drawLineBackward = |this, char, howMany| {
-    #TODO : one char only ?
     howMany:times({
       this:print(char):backward():backward()
     })
@@ -247,7 +162,6 @@ augment org.k33g.rainbow.types.terminal {
   }  
 
   function drawLineDown = |this, char, howMany| {
-    #TODO : one char only ?
     howMany:times({
       this:print(char):down():backward()
     }) 
@@ -255,15 +169,14 @@ augment org.k33g.rainbow.types.terminal {
   }
 
   function drawLineUp = |this, char, howMany| {
-    #TODO : one char only ?
     howMany:times({
       this:print(char):up():backward()
     }) 
     return this
   }
 
-  function simpleBox = |this, width, height| {
-    return this:print("\u250c")
+  function simpleBox = |this, width, height| ->
+    this:print("\u250c")
       :drawLineForward("\u2500", width)
       :print("\u2510")
       :down():backward():drawLineDown("\u2502", height)
@@ -271,12 +184,9 @@ augment org.k33g.rainbow.types.terminal {
       :backward():backward():drawLineBackward("\u2500", width)
       :print("\u2514")
       :backward():up():drawLineUp("\u2502", height)
-  }
 
-  
-
-  function doubleBox = |this, width, height| {
-    return this:print("\u2554")
+  function doubleBox = |this, width, height| ->
+    this:print("\u2554")
       :drawLineForward("\u2550", width)
       :print("\u2557")
       :down():backward():drawLineDown("\u2551", height)
@@ -284,18 +194,17 @@ augment org.k33g.rainbow.types.terminal {
       :backward():backward():drawLineBackward("\u2550", width)
       :print("\u255A")
       :backward():up():drawLineUp("\u2551", height)
-  } 
 
-  function eraseLine = |this| { # don't change cursor position
-    print(this:escCode()+"2K")
-    return this
-  }   
+  # don't change cursor position
+  function eraseLine = |this| -> this:code(this:escCode()+"2K")
 
-  function eraseScreen = |this| { # don't change cursor position
-    print(this:escCode()+"2J")
-    this:home()
-    return this
-  }   
+  # don't change cursor position
+  function eraseScreen = |this| -> this:code(this:escCode()+"2J"):home()
+
+  function code = |this, escapeCode| {
+    print(escapeCode)
+    return this    
+  }
 
   function print = |this, message| {
     this:col(this:col() + message:length())

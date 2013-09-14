@@ -15,7 +15,7 @@ function main = |args| {
     :green():drawLineBackward("-", 6)
     :yellow():drawLineUp("I", 5)
     :pos(10,15):green():simpleBox(5,3)
-    :pos(10,23):cyan():doubleBox(8,4):pos(0,0):print("az"):print("b")
+    :pos(10,23):cyan():doubleBox(8,4):pos(0,0):print("az"):print("b"):forward():forward():green()
 
 
   readln(term:col()+":"+term:row())

@@ -15,13 +15,13 @@ function main = |args| {
   readln("> ?")
 
   console():red():reverse():pos(20,8):print("Hello")
-  console():reset():red():pos(21,10):bright():underscore():print("World!")
+  console():reset():red():pos(21,10):bright():underscore():print("World!"):reset()
 
-  console():pos(2,8):yellow():drawLineForward(".",5):print("X")
+  console():pos(2,8):yellow():drawLineForward(".",5):print("X"):forward():print("✪"):forward():print("❎"):forward():print("🐼")
 
-  error(1, 2,"ERROR")
-  information(2, 2, "INFORMATION")
-  success(3, 2, "BRAVO")
+  #error(1, 2,"ERROR")
+  #information(2, 2, "INFORMATION")
+  #success(3, 2, "BRAVO")
 
   println("")
   println("")
