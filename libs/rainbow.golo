@@ -1,6 +1,6 @@
 module org.k33g.rainbow
 
-struct terminal = {escCode, row, col}
+struct terminal = {escCode}
 
 #http://www.termsys.demon.co.uk/vtansi.htm
 #http://rsiqueira.postbit.com/upload/2/posts/unicode.html
@@ -11,74 +11,71 @@ struct terminal = {escCode, row, col}
 
 augment org.k33g.rainbow.types.terminal {
 
-  function reset = |this| -> this:code(this:escCode()+"0m")
+  function reset = |this| -> this:print(this:escCode()+"0m")
 
   # make reset before ?
-  function bright = |this| -> this:code(this:escCode()+"1m")
+  function bright = |this| -> this:print(this:escCode()+"1m")
 
-  # doesn't work
-  function dim = |this| -> this:code(this:escCode()+"2m")
+  function dim = |this| -> this:print(this:escCode()+"2m")
 
-  function underscore = |this|  -> this:code(this:escCode()+"4m")
+  function underscore = |this|  -> this:print(this:escCode()+"4m")
 
-  # doesn't work
-  function blink = |this| -> this:code(this:escCode()+"5m")
+  function blink = |this| -> this:print(this:escCode()+"5m")
 
-  function reverse = |this|  -> this:code(this:escCode()+"7m")
+  function reverse = |this|  -> this:print(this:escCode()+"7m")
 
-  # doesn't work
-  function hidden = |this| -> this:code(this:escCode()+"8m")
+  function hidden = |this| -> this:print(this:escCode()+"8m")
 
-  function black = |this| -> this:code(this:escCode()+"30m")
+  function black = |this| -> this:print(this:escCode()+"30m")
 
-  function blackBg = |this| -> this:code(this:escCode()+"40m")
+  function blackBg = |this| -> this:print(this:escCode()+"40m")
 
-  function gray = |this| -> this:code(this:escCode()+"30;1m")
+  function gray = |this| -> this:print(this:escCode()+"30;1m")
 
-  function red = |this| -> this:code(this:escCode()+"31m")
+  function red = |this| -> this:print(this:escCode()+"31m")
 
-  function brightRed = |this| -> this:code(this:escCode()+"31;1m")
+  function brightRed = |this| -> this:print(this:escCode()+"31;1m")
 
-  function redBg = |this| -> this:code(this:escCode()+"41m")
+  function redBg = |this| -> this:print(this:escCode()+"41m")
 
-  function green = |this| -> this:code(this:escCode()+"32m")
+  function green = |this| -> this:print(this:escCode()+"32m")
 
-  function brightGreen = |this| -> this:code(this:escCode()+"32;1m")
+  function brightGreen = |this| -> this:print(this:escCode()+"32;1m")
 
-  function greenBg = |this| -> this:code(this:escCode()+"42m")
+  function greenBg = |this| -> this:print(this:escCode()+"42m")
 
-  function yellow = |this| -> this:code(this:escCode()+"33m")
+  function yellow = |this| -> this:print(this:escCode()+"33m")
 
-  function brightYellow = |this| -> this:code(this:escCode()+"33;1m")
+  function brightYellow = |this| -> this:print(this:escCode()+"33;1m")
 
-  function yellowBg = |this| -> this:code(this:escCode()+"43m")
+  function yellowBg = |this| -> this:print(this:escCode()+"43m")
 
-  function blue = |this| -> this:code(this:escCode()+"34m")
+  function blue = |this| -> this:print(this:escCode()+"34m")
 
-  function brightBlue = |this| -> this:code(this:escCode()+"34;1m")
+  function brightBlue = |this| -> this:print(this:escCode()+"34;1m")
 
-  function blueBg = |this| -> this:code(this:escCode()+"44m")
+  function blueBg = |this| -> this:print(this:escCode()+"44m")
 
-  function purple = |this| -> this:code(this:escCode()+"35m") # Magenta
+  function purple = |this| -> this:print(this:escCode()+"35m") # Magenta
 
-  function brightPurple = |this| -> this:code(this:escCode()+"35;1m")
+  function brightPurple = |this| -> this:print(this:escCode()+"35;1m")
 
-  function purpleBg = |this| -> this:code(this:escCode()+"45m")
+  function purpleBg = |this| -> this:print(this:escCode()+"45m")
 
-  function cyan = |this| -> this:code(this:escCode()+"36m")
+  function cyan = |this| -> this:print(this:escCode()+"36m")
 
-  function brightCyan = |this| -> this:code(this:escCode()+"36;1m")
+  function brightCyan = |this| -> this:print(this:escCode()+"36;1m")
 
-  function cyanBg = |this| -> this:code(this:escCode()+"46m")
+  function cyanBg = |this| -> this:print(this:escCode()+"46m")
 
-  function white = |this| -> this:code(this:escCode()+"37m")
+  function white = |this| -> this:print(this:escCode()+"37m")
 
-  function brightWhite = |this| -> this:code(this:escCode()+"37;1m")
+  function brightWhite = |this| -> this:print(this:escCode()+"37;1m")
 
-  function whiteBg = |this| -> this:code(this:escCode()+"47m")
+  function whiteBg = |this| -> this:print(this:escCode()+"47m")
 
   function pos = |this, row, col| ->
-    this:row(row):col(col):code(this:escCode()+"%s;%sf":format(row:toString(), col:toString())) 
+    this:print(this:escCode()+"%s;%sf":format(row:toString(), col:toString())) 
 
   #function pos = |this, row, col| {
   #  this:row(row)
@@ -92,7 +89,7 @@ augment org.k33g.rainbow.types.terminal {
   # Cursor Forward    <ESC>[{COUNT}C
   # Moves the cursor forward by COUNT columns; the default count is 1.
   function forward = |this, howMany| ->
-    this:col(this:col() + howMany):code(this:escCode()+"%sC":format(howMany:toString())) 
+    this:print(this:escCode()+"%sC":format(howMany:toString())) 
 
   #function forward = |this, howMany| {
   #  this:col(this:col() + howMany)
@@ -105,7 +102,7 @@ augment org.k33g.rainbow.types.terminal {
   # Cursor Backward   <ESC>[{COUNT}D
   # Moves the cursor backward by COUNT columns; the default count is 1.
   function backward = |this, howMany| ->
-    this:col(this:col() - howMany):code(this:escCode()+"%sD":format(howMany:toString())) 
+    this:print(this:escCode()+"%sD":format(howMany:toString())) 
 
   #function backward = |this, howMany| {
   #  this:col(this:col() - howMany)
@@ -118,7 +115,7 @@ augment org.k33g.rainbow.types.terminal {
   # Cursor Up   <ESC>[{COUNT}A
   # Moves the cursor up by COUNT rows; the default count is 1.
   function up = |this, howMany| ->
-    this:row(this:row() - howMany):code(this:escCode()+"%sA":format(howMany:toString())) 
+    this:print(this:escCode()+"%sA":format(howMany:toString())) 
 
   #function up = |this, howMany| {
   #  this:row(this:row() - howMany)
@@ -131,7 +128,7 @@ augment org.k33g.rainbow.types.terminal {
  # Cursor Down   <ESC>[{COUNT}B
  # Moves the cursor down by COUNT rows; the default count is 1.
   function down = |this, howMany| ->
-    this:row(this:row() + howMany):code(this:escCode()+"%sB":format(howMany:toString())) 
+    this:print(this:escCode()+"%sB":format(howMany:toString())) 
 
   #function down = |this, howMany| {
   #  this:row(this:row() + howMany)
@@ -141,7 +138,7 @@ augment org.k33g.rainbow.types.terminal {
 
   function down = |this|  -> this:down(1)
   
-  function clear = |this| -> this:code(this:escCode()+"2J")
+  function clear = |this| -> this:print(this:escCode()+"2J")
 
   function drawLineForward = |this, char, howMany| -> this:print(char * howMany) 
 
@@ -199,13 +196,7 @@ augment org.k33g.rainbow.types.terminal {
   # don't change cursor position
   function eraseScreen = |this| -> this:code(this:escCode()+"2J"):home()
 
-  function code = |this, escapeCode| {
-    print(escapeCode)
-    return this    
-  }
-
   function print = |this, message| {
-    this:col(this:col() + message:length())
     print(message)
     return this
   }
@@ -213,7 +204,7 @@ augment org.k33g.rainbow.types.terminal {
 }
 
 function console = {
-  let term = terminal("\u001B[", 0, 0)
+  let term = terminal("\u001B[")
   term:home()
   return term
 } 

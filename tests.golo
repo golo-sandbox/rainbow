@@ -14,7 +14,7 @@ function main = |args| {
   console():reset():cyan():pos(15,10):drawLineForward("=",5)
   readln("> ?")
 
-  console():red():reverse():pos(20,8):print("Hello")
+  console():red():reverse():pos(20,8):blink()print("Hello")
   console():reset():red():pos(21,10):bright():underscore():print("World!"):reset()
 
   console():pos(2,8):yellow():drawLineForward(".",5):print("X"):forward():print("✪"):forward():print("❎"):forward():print("🐼")

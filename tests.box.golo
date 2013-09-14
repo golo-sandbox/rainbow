@@ -18,7 +18,7 @@ function main = |args| {
     :pos(10,23):cyan():doubleBox(8,4):pos(0,0):print("az"):print("b"):forward():forward():green()
 
 
-  readln(term:col()+":"+term:row())
+  readln("????")
 
 
 
