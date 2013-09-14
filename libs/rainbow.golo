@@ -16,10 +16,8 @@ augment org.k33g.rainbow.types.terminal {
   # make reset before ?
   function bright = |this| -> this:code(this:escCode()+"1m")
 
-  function dim = |this| { # doesn't work
-    print(this:escCode()+"2m")
-    return this
-  }
+  # doesn't work
+  function dim = |this| -> this:code(this:escCode()+"2m")
 
   function underscore = |this|  -> this:code(this:escCode()+"4m")
 
