@@ -47,15 +47,16 @@ function Bestiole = {
     return bestiole 
 }
 
+#http://www.fileformat.info/info/unicode/char/search.htm
 
 function Panda = |line, col| {
-  let panda = DynamicObject():mixin(Bestiole()):avatar("🐼")
+  let panda = DynamicObject():mixin(Bestiole()):avatar("\uD83D\uDC3C")
   panda:x(col):y(line):draw()
   return panda
 }
 
 function Tiger = |line, col| {
-  let tiger = DynamicObject():mixin(Bestiole()):avatar("🐯")
+  let tiger = DynamicObject():mixin(Bestiole()):avatar("\uD83D\uDC2F") 
   tiger:x(col):y(line):draw()
   return tiger
 }
