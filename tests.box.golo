@@ -1,6 +1,6 @@
 module tests
 
-import rainbow
+import org.k33g.rainbow
 
 function main = |args| {
 

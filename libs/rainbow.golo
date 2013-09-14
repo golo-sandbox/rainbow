@@ -1,4 +1,4 @@
-module rainbow
+module org.k33g.rainbow
 
 struct terminal = {escCode, row, col}
 
@@ -9,7 +9,7 @@ struct terminal = {escCode, row, col}
 #http://www.unicode.org/charts/
 #http://dmmarks.com/UnicodeChars.html
 
-augment rainbow.types.terminal {
+augment org.k33g.rainbow.types.terminal {
 
   function reset = |this| {
     print(this:escCode()+"0m")
@@ -284,7 +284,18 @@ augment rainbow.types.terminal {
       :backward():backward():drawLineBackward("\u2550", width)
       :print("\u255A")
       :backward():up():drawLineUp("\u2551", height)
-  }  
+  } 
+
+  function eraseLine = |this| { # don't change cursor position
+    print(this:escCode()+"2K")
+    return this
+  }   
+
+  function eraseScreen = |this| { # don't change cursor position
+    print(this:escCode()+"2J")
+    this:home()
+    return this
+  }   
 
   function print = |this, message| {
     this:col(this:col() + message:length())
@@ -292,11 +303,6 @@ augment rainbow.types.terminal {
     return this
   }
 
-  function println = |this, message| {
-    println(message)
-    this:row(this:row() + 1)
-    return this
-  }
 }
 
 function console = {
@@ -304,4 +310,21 @@ function console = {
   term:home()
   return term
 } 
+
+function clear = -> console():clear()
+
+# for test with library
+function error = |line, col, message| {
+  console():red():pos(line, col):eraseLine():print(message)
+}
+
+function information = |line, col, message| {
+  console():blue():pos(line, col):eraseLine():print(message) 
+}
+
+function success = |line, col, message| {
+  console():green():pos(line, col):eraseLine():print(message) 
+}
+
+
 
