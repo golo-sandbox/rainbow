@@ -191,13 +191,17 @@ augment org.k33g.rainbow.types.terminal {
       :backward():up():drawLineUp("\u2551", height)
 
   # don't change cursor position
-  function eraseLine = |this| -> this:code(this:escCode()+"2K")
+  function eraseLine = |this| -> this:print(this:escCode()+"2K")
 
   # don't change cursor position
-  function eraseScreen = |this| -> this:code(this:escCode()+"2J"):home()
+  function eraseScreen = |this| -> this:print(this:escCode()+"2J"):home()
 
   function print = |this, message| {
     print(message)
+    return this
+  }
+  function println = |this, message| {
+    println(message)
     return this
   }
 
